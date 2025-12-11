@@ -13,9 +13,7 @@ def u64(n):
 
 def read_u64(b):
     return int.from_bytes(b, "big")
-# -------------------------------------------------------------------
-# INDEX FILE HEADER
-# -------------------------------------------------------------------
+
 class IndexHeader:
     def __init__(self, root_id=0, next_id=1):
         self.root_id = root_id
@@ -39,9 +37,7 @@ class IndexHeader:
         f.seek(0)
         f.write(block)
 
-# -------------------------------------------------------------------
-# B-TREE NODE BLOCK
-# -------------------------------------------------------------------
+
 class BTreeNode:
     def __init__(self, block_id, parent_id=0):
         self.block_id = block_id
@@ -117,9 +113,7 @@ class BTreeNode:
         f.seek(self.block_id * BLOCK_SIZE)
         f.write(block)
 
-# -------------------------------------------------------------------
-# COMMAND IMPLEMENTATIONS (incomplete — you fill in B-tree logic)
-# -------------------------------------------------------------------
+
 
 def cmd_create(filename):
     if os.path.exists(filename):
@@ -175,9 +169,7 @@ def cmd_load(filename, csvfile):
             cmd_insert(filename, key, value)
 
 
-# -------------------------------------------------------------------
-# MAIN
-# -------------------------------------------------------------------
+
 def main():
     if len(sys.argv) < 3:
         print("Usage: project3 <command> <args>")

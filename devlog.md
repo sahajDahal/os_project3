@@ -21,3 +21,15 @@ Now that the header structure is implemented, the overall file layout feels clea
 - Implement the `IndexHeader` class
 - Add `load` and `save` methods for reading/writing the 512-byte header block
 - Ensure the magic number and block fields follow the specification
+
+# session 3 — 2025-12-10 6:24pm
+
+## Thoughts So Far
+
+Implementing the node block structure clarified how the file-based B-tree will operate. Reading and writing entire nodes at fixed offsets is now straightforward.
+
+## Plan for This Session
+
+- Implement the `BTreeNode` class with in-memory fields
+- Add `load` and `save` methods for full 512-byte node serialization
+- Ensure keys, values, and child pointers follow the required fixed-size layout

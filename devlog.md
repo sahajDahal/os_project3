@@ -33,3 +33,15 @@ Implementing the node block structure clarified how the file-based B-tree will o
 - Implement the `BTreeNode` class with in-memory fields
 - Add `load` and `save` methods for full 512-byte node serialization
 - Ensure keys, values, and child pointers follow the required fixed-size layout
+
+# session 4 — 2025-12-010 6:30pm
+
+## Thoughts So Far
+
+The command layer is now structured, and each operation has a placeholder. This makes it easier to progressively integrate B-tree logic later.
+
+## Plan for This Session
+
+- Add command functions (`create`, `insert`, `search`, `print`, `extract`, `load`)
+- Ensure each command loads the index header correctly
+- Set up placeholders where B-tree operations will eventually plug in

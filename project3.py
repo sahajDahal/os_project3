@@ -116,3 +116,95 @@ class BTreeNode:
 
         f.seek(self.block_id * BLOCK_SIZE)
         f.write(block)
+
+# -------------------------------------------------------------------
+# COMMAND IMPLEMENTATIONS (incomplete — you fill in B-tree logic)
+# -------------------------------------------------------------------
+
+def cmd_create(filename):
+    if os.path.exists(filename):
+        print("File already exists.")
+        return
+
+    with open(filename, "wb") as f:
+        header = IndexHeader()
+        header.save(f)
+
+    print("Created index file.")
+
+def cmd_insert(filename, key, value):
+    with open(filename, "r+b") as f:
+        header = IndexHeader.load(f)
+
+        # TODO: implement B-tree insert properly
+        print(f"Inserting ({key}, {value}) — B-tree logic not implemented.")
+
+def cmd_search(filename, key):
+    with open(filename, "rb") as f:
+        header = IndexHeader.load(f)
+
+        # TODO: implement B-tree search properly
+        print(f"Searching for key {key} — B-tree logic not implemented.")
+
+def cmd_print(filename):
+    with open(filename, "rb") as f:
+        header = IndexHeader.load(f)
+
+        # TODO: traverse the tree and print all key/value pairs
+        print("Print not implemented.")
+
+def cmd_extract(filename, out_csv):
+    if os.path.exists(out_csv):
+        print("Output file already exists.")
+        return
+
+    with open(filename, "rb") as f, open(out_csv, "w") as out:
+        header = IndexHeader.load(f)
+
+        # TODO: traverse and write CSV
+        print("Extract not implemented.")
+
+def cmd_load(filename, csvfile):
+    if not os.path.exists(csvfile):
+        print("CSV file does not exist.")
+        return
+
+    with open(csvfile) as f:
+        for line in f:
+            key, value = map(int, line.strip().split(","))
+            cmd_insert(filename, key, value)
+
+
+# -------------------------------------------------------------------
+# MAIN
+# -------------------------------------------------------------------
+def main():
+    if len(sys.argv) < 3:
+        print("Usage: project3 <command> <args>")
+        return
+
+    cmd = sys.argv[1]
+
+    if cmd == "create":
+        cmd_create(sys.argv[2])
+
+    elif cmd == "insert":
+        cmd_insert(sys.argv[2], int(sys.argv[3]), int(sys.argv[4]))
+
+    elif cmd == "search":
+        cmd_search(sys.argv[2], int(sys.argv[3]))
+
+    elif cmd == "print":
+        cmd_print(sys.argv[2])
+
+    elif cmd == "extract":
+        cmd_extract(sys.argv[2], sys.argv[3])
+
+    elif cmd == "load":
+        cmd_load(sys.argv[2], sys.argv[3])
+
+    else:
+        print("Unknown command.")
+
+if __name__ == "__main__":
+    main()
